@@ -19,6 +19,24 @@ public class Main {
 		
 		glEnable(GL_TEXTURE_2D);
 		
+		float[] vertices = new float[] {
+				-0.5f,0.5f,0,	//0	
+				0.5f,0.5f,0,	//1
+				0.5f,-0.5f,0,	//2
+				-0.5f,-0.5f,0,	//4
+		};
+		float[] texture = new float[] {
+				0,0,
+				1,0,
+				1,1,			
+				0,1,
+		};
+		int[] indices = new int[] {
+				0, 1, 2, 2, 3, 0
+		};
+		
+		Model model = new Model(vertices, texture, indices);
+		
 		Texture tex = new Texture("./res/TestTexture.png");
 		
 		glClearColor(0, 0, 0, 0);		//Колір фону у системі RGBA (значення від 0 до 1)
@@ -39,7 +57,10 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT);//очищення вікна,тобто його залиття кольором, вказаним у glClearColor
 			
 			tex.bind();
-			glBegin(GL_QUADS);				
+			
+			model.render();
+			
+			/*glBegin(GL_QUADS);				
 				glTexCoord2f(0, 0);
 				glVertex2f(-0.5f+x, 0.5f);
 				
@@ -51,7 +72,7 @@ public class Main {
 				
 				glTexCoord2f(0, 1);
 				glVertex2f(-0.5f+x, -0.5f);
-			glEnd();
+			glEnd();*/
 			
 			glfwSwapBuffers(window);
 		}
